@@ -18,6 +18,8 @@ public interface StudentsMapper {
 
     List<Students> selectByExample(StudentsExample example);
 
+    Students getStudentsDetail(Integer id);
+
     Students selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Students record, @Param("example") StudentsExample example);

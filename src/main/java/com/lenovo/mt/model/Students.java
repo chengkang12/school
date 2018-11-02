@@ -9,6 +9,8 @@ public class Students {
 
     private Integer cls;
 
+    private Classes classes;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Students {
 
     public void setCls(Integer cls) {
         this.cls = cls;
+    }
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 }

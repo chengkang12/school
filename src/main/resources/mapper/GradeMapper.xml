@@ -162,4 +162,21 @@
     set Name = #{name,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="Grade_ListClassesMap" type="com.lenovo.mt.model.Grade">
+    <id column="g_id" jdbcType="INTEGER" property="id" />
+    <result column="g_name" jdbcType="VARCHAR" property="name" />
+    <collection property="classes" ofType="com.lenovo.mt.model.Classes">
+      <id column="c_id" jdbcType="INTEGER" property="id" />
+      <result column="c_clsname" jdbcType="VARCHAR" property="clsname" />
+    </collection>
+  </resultMap>
+  <select id="getGradeListClasses" resultMap="Grade_ListClassesMap">
+    select c.ClsName as c_clsname,c.Grade as c_grade,c.ID as c_id,g.`Name` as g_name,g.ID as g_id from Classes c inner join Grade g on c.Grade = g.ID
+  </select>
+  <select id="getGradeListClassesUseStatement" parameterMap="getGradeListClassesUseStatementMap" statementType="CALLABLE" resultMap="Grade_ListClassesMap">
+      call GetGradeDetail(?)
+  </select>
+  <parameterMap id="getGradeListClassesUseStatementMap" type="java.util.Map">
+    <parameter property="gid" mode="IN" javaType="INTEGER"></parameter>
+  </parameterMap>
 </mapper>

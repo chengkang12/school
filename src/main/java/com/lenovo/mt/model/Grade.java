@@ -1,9 +1,21 @@
 package com.lenovo.mt.model;
 
+import java.util.List;
+
 public class Grade {
     private Integer id;
 
     private String name;
+
+    private List<Classes> classes;
+
+    public List<Classes> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classes> classes) {
+        this.classes = classes;
+    }
 
     public Integer getId() {
         return id;

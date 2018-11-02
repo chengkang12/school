@@ -5,6 +5,7 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="ClsName" jdbcType="VARCHAR" property="clsname" />
     <result column="Grade" jdbcType="INTEGER" property="grade" />
+    <association property="gradeDetail" column="Grade" select="getGrade"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -179,4 +180,10 @@
       Grade = #{grade,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getGrade" parameterType="int" resultType="com.lenovo.mt.model.Grade">
+    select
+    <include refid="com.lenovo.mt.mapper.GradeMapper.Base_Column_List" ></include>
+    from grade
+    where ID = #{ID}
+  </select>
 </mapper>

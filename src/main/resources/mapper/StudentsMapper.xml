@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lenovo.mt.mapper.StudentsMapper">
+  <cache type="com.lenovo.mt.config.RedisCache"/>
   <resultMap id="BaseResultMap" type="com.lenovo.mt.model.Students">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Age" jdbcType="SMALLINT" property="age" />
     <result column="Cls" jdbcType="INTEGER" property="cls" />
+    <association property="classes" column="Cls" select="getClasses"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -194,4 +196,32 @@
       Cls = #{cls,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getClasses" parameterType="int" resultType="com.lenovo.mt.model.Classes">
+    select
+    <include refid="com.lenovo.mt.mapper.ClassesMapper.Base_Column_List" ></include>
+    from classes
+    where ID = #{ID}
+  </select>
+  <resultMap id="DetailResultMap" type="com.lenovo.mt.model.Students">
+    <id column="s_id" jdbcType="INTEGER" property="id" />
+    <result column="s_name" jdbcType="VARCHAR" property="name" />
+    <result column="s_age" jdbcType="SMALLINT" property="age" />
+    <result column="s_cls" jdbcType="INTEGER" property="cls" />
+    <association property="classes" javaType="com.lenovo.mt.model.Classes" column="s_cls">
+      <id column="c_id" jdbcType="INTEGER" property="id" />
+      <result column="c_clsname" jdbcType="VARCHAR" property="clsname" />
+      <result column="c_grade" jdbcType="INTEGER" property="grade" />
+      <association property="gradeDetail" javaType="com.lenovo.mt.model.Grade" column="c_grad">
+        <id column="g_id" jdbcType="INTEGER" property="id" />
+        <result column="g_name" jdbcType="VARCHAR" property="name" />
+      </association>
+    </association>
+  </resultMap>
+  <select id="getStudentsDetail" parameterType="java.lang.Integer" resultMap="DetailResultMap">
+    select s.ID s_id,s.`Name` as s_name,s.Age as s_age,s.Cls as s_cls,c.ClsName as c_clsname,c.Grade as c_grade,c.ID as c_id,g.`Name` as g_name,g.ID as g_id
+    from Students s
+    inner join Classes c on s.Cls = c.ID
+    inner join Grade g on c.Grade = g.ID
+    where s.ID = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

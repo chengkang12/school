@@ -3,6 +3,8 @@ package com.lenovo.mt.mapper;
 import com.lenovo.mt.model.Grade;
 import com.lenovo.mt.model.GradeExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface GradeMapper {
@@ -17,6 +19,10 @@ public interface GradeMapper {
     int insertSelective(Grade record);
 
     List<Grade> selectByExample(GradeExample example);
+
+    List<Grade> getGradeListClasses();
+
+    List<Grade> getGradeListClassesUseStatement(Map<String,Integer> pamar);
 
     Grade selectByPrimaryKey(Integer id);
 

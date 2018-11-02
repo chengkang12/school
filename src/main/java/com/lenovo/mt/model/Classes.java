@@ -7,6 +7,8 @@ public class Classes {
 
     private Integer grade;
 
+    private Grade gradeDetail;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Classes {
 
     public void setGrade(Integer grade) {
         this.grade = grade;
+    }
+
+    public Grade getGradeDetail() {
+        return gradeDetail;
+    }
+
+    public void setGradeDetail(Grade gradeDetail) {
+        this.gradeDetail = gradeDetail;
     }
 }

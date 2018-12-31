@@ -36,7 +36,8 @@ public class SchoolApplicationTests {
     public void testLoadStudents() {
         StudentsExample example = new StudentsExample();
         example.setOrderByClause("id desc");
-        List<Students> list = studentsMapper.selectByExample(example);
+        //Students stu = studentsMapper.getStudentsDetail(1);
+        List<Students> list = studentsMapper.getList();
     }
 
     @Test

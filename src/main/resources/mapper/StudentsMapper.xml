@@ -224,4 +224,13 @@
     inner join Grade g on c.Grade = g.ID
     where s.ID = #{id,jdbcType=INTEGER}
   </select>
+  <resultMap id="liststuMap" type="com.lenovo.mt.model.Students">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Age" jdbcType="SMALLINT" property="age" />
+    <result column="Cls" jdbcType="INTEGER" property="cls" />
+  </resultMap>
+  <select id="getList" resultMap="liststuMap">
+    select ID,Name,Age,Cls FROM students
+  </select>
 </mapper>

@@ -1,8 +1,9 @@
 package com.lenovo.mt.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Grade {
+public class Grade implements Serializable {
     private Integer id;
 
     private String name;

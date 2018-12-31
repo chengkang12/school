@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -98,7 +99,7 @@ public class RedisCache implements Cache {
     }
     private RedisTemplate getRedisTemplate() {
         if (redisTemplate == null) {
-            redisTemplate = (RedisTemplate) applicationContext.getBean("redisTemplate");
+            redisTemplate = (RedisTemplate) ApplicationContextHolder.getBean("redisTemplate");
         }
         return redisTemplate;
     }

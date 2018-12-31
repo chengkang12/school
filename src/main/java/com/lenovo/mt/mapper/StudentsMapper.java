@@ -29,4 +29,6 @@ public interface StudentsMapper {
     int updateByPrimaryKeySelective(Students record);
 
     int updateByPrimaryKey(Students record);
+
+    List<Students> getList();
 }

@@ -1,6 +1,8 @@
 package com.lenovo.mt.model;
 
-public class Classes {
+import java.io.Serializable;
+
+public class Classes implements Serializable {
     private Integer id;
 
     private String clsname;
